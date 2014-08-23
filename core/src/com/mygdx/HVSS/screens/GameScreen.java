@@ -22,7 +22,7 @@ public class GameScreen extends AbstractScreen {
 	public void show() {
 		stage = new Stage(new FitViewport(Globals.width, Globals.height), batch);
 		ship = new ShipActor();
-		ship.setPosition(Globals.width / 2 - Assets.ship.getWidth() / 2, Globals.height / 2 - Assets.ship.getHeight() / 2);
+		ship.setPosition(10, Globals.height / 2 - Assets.ship.getHeight() / 2);
 		
 		stage.addActor(ship);
 		Gdx.input.setInputProcessor(stage);

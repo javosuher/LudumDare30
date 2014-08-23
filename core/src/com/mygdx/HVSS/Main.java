@@ -9,6 +9,7 @@ public class Main extends Game {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
+		Globals.main = this;
 		Screens.initialize(batch);
 		setScreen(Screens.GAMESCREEN);
 	}
