@@ -9,11 +9,13 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.HVSS.Assets;
 import com.mygdx.HVSS.Globals;
 import com.mygdx.HVSS.actors.BackgroundActor;
+import com.mygdx.HVSS.actors.PortalActor;
+import com.mygdx.HVSS.actors.SamuelActor;
 import com.mygdx.HVSS.actors.ShipActor;
 
 public class GameScreen extends AbstractScreen {
 	private Stage stage;
-	private Actor background, ship;
+	private Actor background, ship, samuel, portal;
 
 	public GameScreen(SpriteBatch batch) {
 		super(batch);
@@ -25,8 +27,14 @@ public class GameScreen extends AbstractScreen {
 		background = new BackgroundActor();
 		ship = new ShipActor();
 		ship.setPosition(10, Globals.height / 2 - Assets.ship.getHeight() / 2);
+		samuel = new SamuelActor();
+		samuel.setPosition(100, 100);
+		portal = new PortalActor();
+		portal.setPosition(Globals.width - 10 - Assets.portal.getWidth() / 2, Globals.height / 2 - Assets.portal.getHeight() / 2);
 		
 		stage.addActor(background);
+		stage.addActor(samuel);
+		stage.addActor(portal);
 		stage.addActor(ship);
 		Gdx.input.setInputProcessor(stage);
 	}
