@@ -3,6 +3,7 @@ package com.mygdx.HVSS.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -11,11 +12,22 @@ import com.mygdx.HVSS.Assets;
 import com.mygdx.HVSS.Globals;
 
 public class ShipActor extends Actor {
-	private TextureRegion regionShip;
+	private TextureRegion currentShip;
+	private TextureRegion[] shipFrames;
+	private Animation shipAnimation;
+	private float stateTime;
+	
 	private Rectangle bounds;
 	
 	public ShipActor() {
-		regionShip = new TextureRegion(Assets.ship, Assets.ship.getWidth(), Assets.ship.getHeight());
+		TextureRegion[][] tmp = TextureRegion.split(Assets.shipS, Assets.ship.getWidth(), Assets.ship.getHeight());
+		shipFrames = new TextureRegion[2];
+		shipFrames[0] = tmp[0][0];
+		shipFrames[1] = tmp[0][1];
+		shipAnimation = new Animation(0.015f, shipFrames);
+		stateTime = 0f;
+		
+		currentShip = new TextureRegion(Assets.ship, Assets.ship.getWidth(), Assets.ship.getHeight());
 		setSize(Assets.ship.getWidth(), Assets.ship.getHeight());
 		bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
 	}
@@ -24,37 +36,36 @@ public class ShipActor extends Actor {
 	public void draw(Batch batch, float parentAlpha) {
 		Color color = getColor();
 		batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-		batch.draw(regionShip, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+		batch.draw(currentShip, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 
 	@Override
 	public void act(float delta) {
 		super.act(delta);
 		
+		stateTime += delta;
+		currentShip = shipAnimation.getKeyFrame(stateTime, true);
+		
 		boolean PushOneButton = true;
 		if(Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D) && PushOneButton) {
-			if(NotRightCollision(delta)) {
+			PushOneButton = false;
+			if(NotRightCollision(delta))
 				setPosition(getX() + delta * Globals.SSPEED, getY());
-				PushOneButton = false;
-			}
 		}
 		else if(Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A)  && PushOneButton) {
-			if(NotLeftCollision(delta)) {
+			PushOneButton = false;
+			if(NotLeftCollision(delta))
 				setPosition(getX() - delta * Globals.SSPEED, getY());
-				PushOneButton = false;
-			}
 		}
 		if(Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W)  && PushOneButton) {
-			if(NotUpCollision(delta)) {
+			PushOneButton = false;
+			if(NotUpCollision(delta))
 				setPosition(getX(), getY() + delta * Globals.SSPEED);
-				PushOneButton = false;
-			}
 		}
 		else if(Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S)  && PushOneButton) {
-			if(NotDownCollision(delta)) {
+			PushOneButton = false;
+			if(NotDownCollision(delta))
 				setPosition(getX(), getY() - delta * Globals.SSPEED);
-				PushOneButton = false;
-			}
 		}
 		
 		setBounds(getX(), getY());
