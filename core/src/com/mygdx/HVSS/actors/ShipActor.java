@@ -48,22 +48,22 @@ public class ShipActor extends Actor {
 		currentShip = shipAnimation.getKeyFrame(stateTime, true);
 		
 		boolean PushOneButton = true;
-		if(Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D) && PushOneButton) {
+		if(/*Gdx.input.isKeyPressed(Keys.RIGHT) || */Gdx.input.isKeyPressed(Keys.D) && PushOneButton) {
 			PushOneButton = false;
 			if(NotRightCollision(delta))
 				setPosition(getX() + delta * Globals.SSPEED, getY());
 		}
-		else if(Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A)  && PushOneButton) {
+		else if(/*Gdx.input.isKeyPressed(Keys.LEFT) || */Gdx.input.isKeyPressed(Keys.A)  && PushOneButton) {
 			PushOneButton = false;
 			if(NotLeftCollision(delta))
 				setPosition(getX() - delta * Globals.SSPEED, getY());
 		}
-		if(Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W)  && PushOneButton) {
+		if(/*Gdx.input.isKeyPressed(Keys.UP) || */Gdx.input.isKeyPressed(Keys.W)  && PushOneButton) {
 			PushOneButton = false;
 			if(NotUpCollision(delta))
 				setPosition(getX(), getY() + delta * Globals.SSPEED);
 		}
-		else if(Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S)  && PushOneButton) {
+		else if(/*Gdx.input.isKeyPressed(Keys.DOWN) || */Gdx.input.isKeyPressed(Keys.S)  && PushOneButton) {
 			PushOneButton = false;
 			if(NotDownCollision(delta))
 				setPosition(getX(), getY() - delta * Globals.SSPEED);
