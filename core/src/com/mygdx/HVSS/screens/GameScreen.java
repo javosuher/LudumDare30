@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.HVSS.Assets;
 import com.mygdx.HVSS.Globals;
+import com.mygdx.HVSS.Timer;
 import com.mygdx.HVSS.actors.BackgroundActor;
 import com.mygdx.HVSS.actors.PortalActor;
 import com.mygdx.HVSS.actors.SamuelActor;
@@ -16,6 +17,7 @@ import com.mygdx.HVSS.actors.ShipActor;
 public class GameScreen extends AbstractScreen {
 	private Stage stage;
 	private Actor background, ship, samuel, portal;
+	private Timer timer;
 
 	public GameScreen(SpriteBatch batch) {
 		super(batch);
@@ -37,13 +39,17 @@ public class GameScreen extends AbstractScreen {
 		stage.addActor(portal);
 		stage.addActor(ship);
 		Gdx.input.setInputProcessor(stage);
+		
+		timer = new Timer(5);
+		timer.start();
 	}
 	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
+		//System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
+		System.out.println(timer.getTime());
 		
 		stage.act(delta);
 		stage.draw();
