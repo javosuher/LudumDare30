@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.HVSS.Assets;
+import com.mygdx.HVSS.Globals;
 
 public class SamuelActor extends Actor {
 	private final int FRAMES =  2;
@@ -14,6 +15,7 @@ public class SamuelActor extends Actor {
 	private TextureRegion[] samuelFrames;
 	private Animation samuelAnimation;
 	private float stateTime;
+	private boolean update;
 	
 	private Rectangle bounds;
 	
@@ -28,6 +30,7 @@ public class SamuelActor extends Actor {
 		currentSamuel = samuelFrames[0];
 		setSize(Assets.samuel.getWidth() / FRAMES, Assets.samuel.getHeight());
 		bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
+		update = false;
 	}
 
 	@Override
@@ -43,7 +46,22 @@ public class SamuelActor extends Actor {
 		
 		stateTime += delta;
 		currentSamuel = samuelAnimation.getKeyFrame(stateTime, true);
-	}	
+		
+		if(update) {
+			setPosition(getX() - Globals.SPEEDSAM * delta, getY());
+			setBounds(getX(), getY());
+		}
+	}
+	
+	public void update() {
+		update = true;
+	}
+	public void disable() {
+		update = false;
+	}
+	public boolean getUpdate() {
+		return update;
+	}
 	
 	public Rectangle getBounds() {
 		return bounds;
