@@ -40,7 +40,7 @@ public class GameScreen extends AbstractScreen {
 		stage.addActor(ship);
 		Gdx.input.setInputProcessor(stage);
 		
-		timer = new Timer(5);
+		timer = new Timer(0);
 		timer.start();
 	}
 	

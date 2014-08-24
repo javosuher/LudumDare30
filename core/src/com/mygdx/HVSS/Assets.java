@@ -3,6 +3,7 @@ package com.mygdx.HVSS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public final class Assets {
 	public final static Texture background = new Texture(Gdx.files.internal("Images/background.png"));
@@ -16,4 +17,6 @@ public final class Assets {
 	public final static Sound win = Gdx.audio.newSound(Gdx.files.internal("Sounds/win.wav"));
 	public final static Sound lose = Gdx.audio.newSound(Gdx.files.internal("Sounds/lose.wav"));
 	public final static Sound portalS = Gdx.audio.newSound(Gdx.files.internal("Sounds/portal.wav"));
+	
+	public final static BitmapFont font = new BitmapFont(Gdx.files.internal("Font/ubuntu.fnt"), Gdx.files.internal("Font/ubuntu.png"), false);
 }

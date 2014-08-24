@@ -46,18 +46,20 @@ public class Timer implements Runnable {
 		else if(mode == BACK) {
 			try {
 				while(timerActive) {
-					Thread.sleep(4);
-					thousandths -= 4;
-					if(thousandths < 0) {
-						thousandths = 999;
-						seconds -= 1;
-						if(seconds < 0) {
-							seconds = 59;
-							minutes--;
-						}
-					}
 					if(minutes == 0)
 						timerActive = false;
+					else {
+						Thread.sleep(4);
+						thousandths -= 4;
+						if(thousandths < 0) {
+							thousandths = 999;
+							seconds -= 1;
+							if(seconds < 0) {
+								seconds = 59;
+								minutes--;
+							}
+						}
+					}
 				}
 			} catch(Exception e) {}
 		}
@@ -97,5 +99,12 @@ public class Timer implements Runnable {
 		else if(thousandths < 100) t = "0" + thousandths;
 		else t = thousandths.toString();
 		return m + ":" + s + ":" + t;
+	}
+	
+	public boolean isOver() {
+		if(mode == BACK && minutes == 0)
+			return true;
+		else
+			return false;
 	}
 }
