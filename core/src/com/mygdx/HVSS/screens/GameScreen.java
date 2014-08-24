@@ -8,11 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.HVSS.Assets;
 import com.mygdx.HVSS.Globals;
+import com.mygdx.HVSS.actors.BackgroundActor;
 import com.mygdx.HVSS.actors.ShipActor;
 
 public class GameScreen extends AbstractScreen {
 	private Stage stage;
-	private Actor ship;
+	private Actor background, ship;
 
 	public GameScreen(SpriteBatch batch) {
 		super(batch);
@@ -21,9 +22,11 @@ public class GameScreen extends AbstractScreen {
 	@Override
 	public void show() {
 		stage = new Stage(new FitViewport(Globals.width, Globals.height), batch);
+		background = new BackgroundActor();
 		ship = new ShipActor();
 		ship.setPosition(10, Globals.height / 2 - Assets.ship.getHeight() / 2);
 		
+		stage.addActor(background);
 		stage.addActor(ship);
 		Gdx.input.setInputProcessor(stage);
 	}

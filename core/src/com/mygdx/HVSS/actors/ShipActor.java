@@ -12,6 +12,7 @@ import com.mygdx.HVSS.Assets;
 import com.mygdx.HVSS.Globals;
 
 public class ShipActor extends Actor {
+	private final int FRAMES =  2;
 	private TextureRegion currentShip;
 	private TextureRegion[] shipFrames;
 	private Animation shipAnimation;
@@ -21,7 +22,7 @@ public class ShipActor extends Actor {
 	
 	public ShipActor() {
 		TextureRegion[][] tmp = TextureRegion.split(Assets.shipS, Assets.ship.getWidth(), Assets.ship.getHeight());
-		shipFrames = new TextureRegion[2];
+		shipFrames = new TextureRegion[FRAMES];
 		shipFrames[0] = tmp[0][0];
 		shipFrames[1] = tmp[0][1];
 		shipAnimation = new Animation(0.015f, shipFrames);
