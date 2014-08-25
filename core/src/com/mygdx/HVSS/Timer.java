@@ -46,7 +46,7 @@ public class Timer implements Runnable {
 		else if(mode == BACK) {
 			try {
 				while(timerActive) {
-					if(minutes == 0)
+					if(minutes == 0 && seconds < 0)
 						timerActive = false;
 					else {
 						Thread.sleep(4);
@@ -55,8 +55,11 @@ public class Timer implements Runnable {
 							thousandths = 999;
 							seconds -= 1;
 							if(seconds < 0) {
-								seconds = 59;
-								minutes--;
+								if(minutes != 0) {
+									seconds = 59;
+									minutes--;
+								}
+								else seconds = 0;
 							}
 						}
 					}
@@ -102,7 +105,7 @@ public class Timer implements Runnable {
 	}
 	
 	public boolean isOver() {
-		if(mode == BACK && minutes == 0)
+		if(mode == BACK && minutes == 0 && seconds == 0)
 			return true;
 		else
 			return false;

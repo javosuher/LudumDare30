@@ -59,6 +59,13 @@ public class SamuelActor extends Actor {
 	public void disable() {
 		update = false;
 	}
+	
+	@Override
+	public void setPosition(float x, float y) {
+		super.setPosition(x, y);
+		setBounds(x, y);
+	}
+
 	public boolean getUpdate() {
 		return update;
 	}

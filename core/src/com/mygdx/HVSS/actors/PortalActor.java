@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.HVSS.Assets;
+import com.mygdx.HVSS.Globals;
 
 public class PortalActor extends Actor {
 	private final int FRAMES =  2;
@@ -14,6 +15,7 @@ public class PortalActor extends Actor {
 	private TextureRegion[] portalFrames;
 	private Animation portalAnimation;
 	private float stateTime;
+	private boolean update;
 	
 	private Rectangle bounds;
 	
@@ -28,6 +30,7 @@ public class PortalActor extends Actor {
 		currentPortal = portalFrames[0];
 		setSize(Assets.portal.getWidth() / FRAMES, Assets.portal.getHeight());
 		bounds = new Rectangle(getX(), getY(), getWidth(), getHeight());
+		update = false;
 	}
 
 	@Override
@@ -43,7 +46,22 @@ public class PortalActor extends Actor {
 		
 		stateTime += delta;
 		currentPortal = portalAnimation.getKeyFrame(stateTime, true);
-	}	
+		
+		if(update) {
+			setPosition(getX() - Globals.SSPEED * delta, getY());
+			setBounds(getX(), getY());
+		}
+	}
+	
+	public void update() {
+		update = true;
+	}
+	public void disable() {
+		update = false;
+	}
+	public boolean getUpdate() {
+		return update;
+	}
 	
 	public Rectangle getBounds() {
 		return bounds;
@@ -51,5 +69,11 @@ public class PortalActor extends Actor {
 	public void setBounds(float x, float y) {
 		bounds.x = x;
 		bounds.y = y;
+	}
+	
+	@Override
+	public void setPosition(float x, float y) {
+		super.setPosition(x, y);
+		setBounds(x, y);
 	}
 }

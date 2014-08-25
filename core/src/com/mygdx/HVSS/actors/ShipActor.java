@@ -113,4 +113,10 @@ public class ShipActor extends Actor {
 		bounds.x = x;
 		bounds.y = y;
 	}
+	
+	@Override
+	public void setPosition(float x, float y) {
+		super.setPosition(x, y);
+		setBounds(x, y);
+	}
 }
